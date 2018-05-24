@@ -19,9 +19,15 @@ class MyFuncTestCase(unittest.TestCase):
 		self.assertEqual(b.number_of_donations,3)
 		self.assertEqual(b.donation_average,600)
 
-
-
-
+	def test_donor_db_class(self):
+		a = Donor("Foghorn Leghorn",[100,200])
+		b = Donor("Bugs Bunny",[500,600])
+		donor_db = Donor_db()
+		donor_db.add_donor(a)
+		donor_db.add_donor(b)
+		self.assertEqual(donor_db.get_sorted_donors(),['bugs bunny','foghorn leghorn'])
+		self.assertEqual(donor_db.num_donors(),2)
+		self.assertEqual(donor_db.get_donor('Bugs Bunny'),b)
 
 if __name__ == '__main__':
 	unittest.main()

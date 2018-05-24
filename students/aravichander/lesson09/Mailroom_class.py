@@ -5,7 +5,7 @@ import json
 import unittest 
 import math 
 
-#If a function works with a single donor, it will be in this class
+
 class Donor:
 	def __init__(self,name,donations = None): #add default parameters for donations
 		self._name = name
@@ -30,16 +30,12 @@ class Donor:
 	def number_of_donations(self):
 		return len(self._donations)
 #My ipython was going nuts so I had to manually calculate the average >=(
-	
 	@property
 	def donation_average(self):
 		return sum(self._donations)/len(self._donations)
 
-	# def __repr__(self):
-	# 	return "Circle({})".format(self.radius) 
 
 
-#If a function works with multiple donors, it will be in this class
 class Donor_db:
 	def __init__(self):
 		self._donors = {}
@@ -47,11 +43,12 @@ class Donor_db:
 	def add_donor(self,donor):
 		self._donors[donor.name.lower()] = donor
 
-	def all_donors_donations(self):
-		total_sum = 0
-		for x,v in self.donors.items():
-			total_sum = total_sum + sum(v)
-		return total_sum
+	# def all_donors_donations(self): Couldn't figure out the issue here re:testing
+	# 	total_sum = 0
+	# 	for name,donor_obj in self._donors.items():
+	# 		print(name)
+	# 		total_sum = total_sum + donor_obj.sum_donation
+	# 	return total_sum
 
 	def get_donor(self, donor_name):
 	 	return self._donors[donor_name.lower()]
@@ -63,9 +60,12 @@ class Donor_db:
 	def get_sorted_donors(self): 
 		return sorted(self._donors)
 
-	@property
-	def numberofdonors(self):
+	def num_donors(self):
 		return len(self._donors)
+
+	# @property
+	# def number_of_donors(self):
+	# 	return len(self._donors)
 
 #################################################################################
 
