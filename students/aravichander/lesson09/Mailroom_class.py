@@ -3,6 +3,7 @@
 import sys
 import json
 import unittest 
+import math 
 
 #If a function works with a single donor, it will be in this class
 class Donor:
@@ -26,12 +27,13 @@ class Donor:
 		return sum(self._donations)
 
 	@property
-	def number_of_donations(self,donations):
+	def number_of_donations(self):
 		return len(self._donations)
-
+#My ipython was going nuts so I had to manually calculate the average >=(
+	
 	@property
-	def donation_average(self,donations):
-		return average(self._donation)
+	def donation_average(self):
+		return sum(self._donations)/len(self._donations)
 
 	# def __repr__(self):
 	# 	return "Circle({})".format(self.radius) 
@@ -126,7 +128,10 @@ def newdonation(db):
 	while len(str.strip(newdonor)) == 0:
 		newdonor = input("Invalid input, enter name of new donor\n")
 	newdonor = str.strip(newdonor)
-	newdonor_object = Donor(newdonor)
+	try:
+		newdonor_object = db.get_donor(newdonor)
+	except:	
+		newdonor_object = Donor(newdonor)
 	donationsdone = False
 	while donationsdone is False:	
 		donation = input("Input donations or hit enter when done\n")
