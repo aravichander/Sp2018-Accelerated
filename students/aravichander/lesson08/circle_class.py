@@ -9,7 +9,7 @@ class Circle:
 		elif radius < 0:
 			raise ValueError
 		else:
-			self.radius = radius
+			self.radius = float(radius)
 			#print("Circle with radius {0:.6f}".format(radius))
 	
 	def __str__(self):
@@ -20,11 +20,11 @@ class Circle:
 	
 	@property
 	def diameter(self):
-		return self.radius*2
+		return self.radius*2.0
 
 	@diameter.setter
 	def diameter(self,diameter):
-		self.radius = (diameter)/2
+		self.radius = (diameter)/2.0
 
 	@property
 	def area(self):
@@ -32,12 +32,11 @@ class Circle:
 		#print("Area of circle is {0:.2f}".format(area))
 
 	#not fully understanding this but hoping I did this correctly!
-	@classmethod
-	def circle_from_diameter(cls, diameter):
-		radius = diameter/2
-		return cls.Circle(radius)
 
-	
+	@classmethod
+	def from_diameter(cls, diameter):
+		return Circle(diameter / 2.0)
+
 	#being able to add 2 new circles together
 	def __add__(self,newcircle):
 		if isinstance(newcircle,Circle):

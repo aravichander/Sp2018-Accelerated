@@ -4,67 +4,88 @@ import sys
 import json
 import unittest 
 
+#If a function works with a single donor, it will be in this class
 class Donor:
-	def __init__(self,Name):
+	def __init__(self,Name,donations = None): #add default parameters for donations
 		self.Name = Name
+		self.donations = [] if donations is None else donations 
+
+	def add_donations(self,donation):
+		 self.donations.append(donation)
+
+	@property
+	def Name(self):
+		return self.Name
 
 	@property
 	def donations(self):
 		return self.donations
 
-	@classmethod
-	def sumdonation(cls, donations):
-		total = sum(self.donations)
-		return cls.Donor(Name)
-
-class Donorlist:
-	def __init__(self,Donors)
-
-
+	@property
+	def sum_donation(self, donations):
+		return sum(self.donations)
 
 	@property
-	def numberofdonors(self)
+	def number_of_donations(self,donations):
+		return len(self.donations)
 
 	@property
-	def totaldonationsofdonors(self)
+	def donation_average(self,donations):
+		return average(self.donation)
 
-	@classmethod
-	def memberdonations(cls..etc.)
-
-
-
+	# def __repr__(self):
+	# 	return "Circle({})".format(self.radius) 
 
 
+#If a function works with multiple donors, it will be in this class
+class Donor_db:
+	def __init__(self):
+		self.donors = {}
+
+	def add_donor(self,donor):
+		self.donors[donor.name.lower()] = donor
+
+	def total_donors(self,donor_name):
+		return self.donors[donor_name.lower()].sum_donation
+
+	 def get_donor(self, donor_name):
+        return self.donors[donor_name.lower()]
+
+	@property
+	def numberofdonors(self):
+		return len(self.donors)
 
 
 
 
 
+#################################################################################
 
+Db = Donor_db()
 
-Donors = {}
-
-def createlist():
+def create_db():
+	#a = Donor("Bill Gates")
+	#add donations to Donor using method
 	Donors["Bill Gates"] = [10000,12000]
 	Donors["Jeff Bezos"]=[50]
 	Donors["Mark Zuckerberg"] = [500,600,700]
 	Donors["Paul Allen"] = [250,350,450]
 	Donors["King of Siam"] = [200,250]
 
-def getlist():
-	return Donors 
+def get_Db():
+	return Db 
 	
 
-def printdonors():
-	for x,v in Donors.items():
-		print("\n{} donated ${}".format(x,v))
+def print_Db():
+	for x,v in Db.items(): #modify to get proper name of donor
+		print("\n{} donated ${}".format(x,v)) 
 
 def thankall():
-	for x in Donors:
-		totaldonated = sum(Donors[x])
+	for x in Db:
+		totaldonated = sum(Donors[x]) #call property of donor that calculates total donations
 		letterofthanks(x,totaldonated)
 
-def letterofthanks(donorname,totaldonated):
+def letterofthanks(donorname,totaldonated): #Potentially create method for letterofthanks within donor class
 	#To add sum of donations
 	filename = donorname+".txt"
 	f = open(filename,"w+")
@@ -73,7 +94,7 @@ def letterofthanks(donorname,totaldonated):
 	f.close()
 	print("\nLetter of thanks has been saved to hard disk as text file under "+str(filename))
 
-def sumdonor(thankdonor):
+def sumdonor(thankdonor): #redundant - refactor to remove this
 	return sum(Donors[thankdonor])
 
 def searchdonors(thankdonor):
